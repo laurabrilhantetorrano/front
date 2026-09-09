@@ -245,7 +245,14 @@ throw new Error(dados.mensagem || "Não foi possível salvar.");
 //     histórico e obedecer a lei. Quando você "exclui" sua conta numa rede
 //     social, quase sempre é isso que acontece.
 //
-export async function desativarConta(token) {
-  // ↓↓↓ APAGUE ESTA LINHA E ESCREVA SEU CÓDIGO ↓↓↓
-  throw new Error("🚧 TAREFA 4 ainda não foi implementada (src/services/api.js)");
+  export async function desativarConta(token) {
+  const resposta = await fetch(`${API_URL}/api/usuarios/desativar`, {
+  method: "DELETE",
+headers: { Authorization: `Bearer ${token}` },
+});
+const dados = await resposta.json();
+if (!resposta.ok) {
+throw new Error(dados.mensagem || "Não foi possível desativar a conta.");
+}
+return dados;
 }
